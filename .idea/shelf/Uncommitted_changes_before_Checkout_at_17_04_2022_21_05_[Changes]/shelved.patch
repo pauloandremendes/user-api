@@ -1,0 +1,24 @@
+Index: src/main/java/com/userapi/controller/UserController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.userapi.controller;\n\nimport com.userapi.model.dto.UserDTO;\nimport com.userapi.service.UserService;\nimport io.swagger.annotations.Api;\nimport io.swagger.annotations.ApiOperation;\nimport org.springframework.beans.factory.annotation.Autowired;\nimport org.springframework.web.bind.annotation.*;\n\nimport java.util.List;\n\n@RestController\n@Api(value = \"CRUD do cadastro de produtos.\")\npublic class UserController {\n\n    @Autowired\n    private UserService userService;\n\n    @GetMapping(\"/user/\")\n    @ApiOperation(value = \"Obtem uma lista de todos os usuários cadastrados.\")\n    public List<UserDTO> getUsers() {\n        List<UserDTO> usuarios = userService.getAll();\n        return usuarios;\n    }\n\n    @GetMapping(\"/user/{id}\")\n    @ApiOperation(value = \"Método responsável pela busca de usuário informando o ID.\")\n    UserDTO findById(@PathVariable Long id) {\n        return userService.findById(id);\n    }\n\n    @PostMapping(\"/user\")\n    @ApiOperation(value = \"Cadastro de novos usuários.\")\n    UserDTO newUser(@RequestBody UserDTO userDTO) {\n        return userService.save(userDTO);\n    }\n\n    @GetMapping(\"/user/cpf/{cpf}\")\n    @ApiOperation(value = \"Busca de usuário pelo documento de CPF.\")\n    UserDTO findByCpf(@PathVariable String cpf) {\n        return userService.findByCpf(cpf);\n    }\n\n    @DeleteMapping(\"/user/{id}\")\n    @ApiOperation(value = \"Exclusão de usuário pelo ID.\")\n    UserDTO delete(@PathVariable Long id) {\n        return userService.delete(id);\n    }\n\n    @GetMapping(\"/user/search\")\n    @ApiOperation(value = \"Busca por nomes baseado no valor informado.\")\n    public List<UserDTO> queryByName(\n            @RequestParam(name=\"nome\", required = true)\n                    String nome) {\n        return userService.queryByName(nome);\n    }\n}\n
+===================================================================
+diff --git a/src/main/java/com/userapi/controller/UserController.java b/src/main/java/com/userapi/controller/UserController.java
+--- a/src/main/java/com/userapi/controller/UserController.java	
++++ b/src/main/java/com/userapi/controller/UserController.java	
+@@ -1,5 +1,6 @@
+ package com.userapi.controller;
+ 
++import antlr.collections.List;
+ import com.userapi.model.dto.UserDTO;
+ import com.userapi.service.UserService;
+ import io.swagger.annotations.Api;
+@@ -7,8 +8,6 @@
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.web.bind.annotation.*;
+ 
+-import java.util.List;
+-
+ @RestController
+ @Api(value = "CRUD do cadastro de produtos.")
+ public class UserController {
