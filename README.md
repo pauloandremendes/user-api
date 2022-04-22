@@ -72,31 +72,41 @@ sudo apt remove docker docker-engine docker.io
 
 O terceiro passo é instalar o Docker em sua máquina:
 
-
-
-[Boson Treinamentos](https://www.youtube.com/watch?v=Z_SPrzlT4Fc&list=PLucm8g_ezqNoAkYKXN_zWupyH6hQCAwxY) 
-
 ```
-Foi utilizado o Docker como forma facilitadora do uso do SGBD...
-
+sudo apt install docker.io
 ```
 
-
-### ⚙️ Credenciais do Banco
-
-Após a instalação das ferramentas indicadas, é preciso alterar as credenciais do banco de dados, para executar localmente conforme segue o exemplo baixo.
+Como operação final, o comando systemctl adiciona o Docker como um serviço do SO e faz com que ele seja iniciado sempre que a máquina for inicializada.
 
 ```
-Arquivo com credenciais do SGBD: 
-
-src/main/resources/application.properties
-
-Inserir credenciais conforme o exemplo: 
-
-2 |spring.datasource.username=postgres
-3 |spring.datasource.password=postgres377
+sudo systemctl start docker
+sudo systemctl enable docker
 
 ```
+
+Uma forma de visualizar se a instalação foi feita corretamente, basta executar o comando "docker version". O resultado será como esse:
+
+Client: Docker Engine - Community
+Version:
+19.03.1
+
+Para instalação nos ambientes Windows e no Mac, existe uma ferramenta que facilita bastante a instalação do Docker para ambos os SO's.
+Basta clicar no site da ferramenta e seguir os passos indicados no mesmo.
+
+[Docker for Desktop](https://www.docker.com/products/docker-desktop/) 
+
+Essa ferramenta além de instalar,permite criação e execução de contêineres.
+
+
+### Instalação Postgres com imagem do Docker
+
+Criando contêiner que execute o PostgreSQL. Executar o seguinte comando:
+
+```
+docker run -d -p 5432:5433 -e POSTGRES_PASSWORD=postgres postgres
+```
+Esse comando cria um contêiner usando a imagem postgres. Se ela não existe em sua máquina, não há problema, o Docker baixará a imagem diretamente do [DockerHub](https://hub.docker.com/) e a instalará em seu registro Docker local. A opção -p faz o mapeamento da porta local damáquina para a porta do contêiner, o que permitirá que o PostgreSQL seja
+acessado no endereço http://localhost:5432.
 
 ### 🔩 SWAGGER
 
