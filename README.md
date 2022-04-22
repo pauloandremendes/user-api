@@ -123,6 +123,9 @@ Mencione as ferramentas que você usou para criar seu projeto
 * [Maven](https://maven.apache.org/) - Gerente de Dependência
 * [SDKMAN!](https://sdkman.io/) - Gerenciador de kit de desenvolvimento
 * [SWAGGER](https://swagger.io/) - Usada para teste e documentação
+* [DOCKER](https://www.docker.com/) - Utilizado na instalação da imagem do postgres.
+
+
 
 
 
